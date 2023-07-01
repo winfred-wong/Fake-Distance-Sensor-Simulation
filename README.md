@@ -14,8 +14,7 @@ No other additional installation is required except those stated in CARLO.
 Simply run
 
 ```python
-    python
-example.py
+    python example.py
 ```
 
 ## Details
@@ -38,6 +37,7 @@ The class will assume there is an imaginary line extending from the car's positi
 2. The imaginary line must be longer than the longest diagonal of the rectangle to avoid mistakes
 
 `Based on https://www.geeksforgeeks.org/check-if-two-given-line-segments-intersect/`
+
 Depending on the angle, we will calculate the x and y of the imaginary line using trigonometry. Then we find if the
 imaginary line has intersections with the walls on four sides.
 When we find out which side of the wall the imaginary line intersects with, we can then calculate the distance between
