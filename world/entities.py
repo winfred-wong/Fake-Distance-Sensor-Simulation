@@ -73,16 +73,16 @@ class Entity:
 
     def collidesWith(self, other: Union['Point', 'Entity']) -> bool:
         if isinstance(other, Entity):
-            return self.obj.intersectsWith(other.obj)
+            return self.obj.intersects_with(other.obj)
         elif isinstance(other, Point):
-            return self.obj.intersectsWith(other)
+            return self.obj.intersects_with(other)
         raise NotImplementedError
 
     def distanceTo(self, other: Union['Point', 'Entity']) -> float:
         if isinstance(other, Entity):
-            return self.obj.distanceTo(other.obj)
+            return self.obj.distance_to(other.obj)
         elif isinstance(other, Point):
-            return self.obj.distanceTo(other)
+            return self.obj.distance_to(other)
         raise NotImplementedError
 
     def copy(self):

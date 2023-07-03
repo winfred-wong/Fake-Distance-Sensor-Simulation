@@ -1,7 +1,13 @@
-# Fake Distance Sensor Simulation
+# Fake Distance Sensor Simulation For SLAM
 
 A fake distance sensor simulation powered by CARLO. This repo contains a fake sensor class that can simulate a real
-world distance sensor and output distance data as the car moves around in the simulated world.
+world distance sensor and output distance data as the car moves around in the simulated world. Additionally, a mapping
+functionality is added, so that we can visualise the fake distance sensor's data to simulate mapping as the car move
+around. Video is attached below for reference.
+
+## Video
+
+![](https://j.gifs.com/pZDnop.gif)
 
 ## Installation
 
@@ -13,9 +19,8 @@ No other additional installation is required except those stated in CARLO.
 
 Simply run
 
-```python
-    python
-example.py
+```
+    python example.py
 ```
 
 ## Details
@@ -37,9 +42,12 @@ The class will assume there is an imaginary line extending from the car's positi
 1. The imaginary line is at the same heading angle of the car
 2. The imaginary line must be longer than the longest diagonal of the rectangle to avoid mistakes
 
-`Based on https://www.geeksforgeeks.org/check-if-two-given-line-segments-intersect/`
-
-Depending on the angle, we will calculate the x and y of the imaginary line using trigonometry. Then we find if the
-imaginary line has intersections with the walls on four sides.
-When we find out which side of the wall the imaginary line intersects with, we can then calculate the distance between
-the wall and the car at that exact heading angle, this gives us the fake distance sensor data we need.
+Based on `https://www.geeksforgeeks.org/check-if-two-given-line-segments-intersect/`, we can find out if two lines
+segments intersect. Then, using `https://www.cuemath.com/geometry/intersection-of-two-lines/` we can find the
+intersection point
+of two lines. From here, we have the heading angle of the car and the coordinate (with respect to the car) of the wall.
+So we convert the coordinate to that with respect to the origin by addition and then calculate the distance between
+the car and the coordinate of the wall with respect to the origin to simulate a distance sensor. Finally, with the
+heading angle
+and distance, we can convert from polar coordinate to cartesian to draw a dot on the map and as the car moves, we will
+complete the map.
