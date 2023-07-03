@@ -11,9 +11,12 @@ class World:
         self.visualizer = Visualizer(width, height, ppm=ppm)
 
     def add(self, entity: Entity):
-        if entity.movable:
-            self.dynamic_agents.append(entity)
-        else:
+        try:
+            if entity.movable:
+                self.dynamic_agents.append(entity)
+            else:
+                self.static_agents.append(entity)
+        except AttributeError:
             self.static_agents.append(entity)
 
     def tick(self):

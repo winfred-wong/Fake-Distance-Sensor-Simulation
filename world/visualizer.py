@@ -32,15 +32,18 @@ class Visualizer:
 
         # Add the updated movable agents (and the unmovable ones if they were not rendered before)
         for agent in agents:
-            if agent.movable or not self.visualized_imgs:
-                if isinstance(agent, RectangleEntity):
-                    C = [self.ppm * c for c in agent.corners]
-                    img = Polygon([Point(c.x, self.display_height - c.y) for c in C])
-                else:
-                    raise NotImplementedError
-                img.setFill(agent.color)
-                img.draw(self.win)
-                new_visualized_imgs.append({'movable': agent.movable, 'graphics': img})
+            try:
+                if agent.movable or not self.visualized_imgs:
+                    if isinstance(agent, RectangleEntity):
+                        C = [self.ppm * c for c in agent.corners]
+                        img = Polygon([Point(c.x, self.display_height - c.y) for c in C])
+                    else:
+                        raise NotImplementedError
+                    img.setFill(agent.color)
+                    img.draw(self.win)
+                    new_visualized_imgs.append({'movable': agent.movable, 'graphics': img})
+            except AttributeError:
+                pass
 
         self.visualized_imgs = new_visualized_imgs
 

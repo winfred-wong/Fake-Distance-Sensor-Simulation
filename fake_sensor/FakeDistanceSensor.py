@@ -59,21 +59,28 @@ class FakeDistanceSensor:
         # Draw a line between the car and the imagined point
         car_straight_line = Line(self.car_center, Point(x, y))
 
-        # Walls for the world
-        bottom_line: Line = Line(Point(0, 0), Point(world_width, 0))
-        left_line: Line = Line(Point(0, 0), Point(0, world_height))
-        right_line: Line = Line(Point(world_width, 0), Point(world_width, world_height))
-        top_line: Line = Line(Point(0, world_height), Point(world_width, world_height))
+        short_width = world_width * close_side_border_factor
+        long_width = world_width - short_width
+        short_height = world_height * close_side_border_factor
+        long_height = world_height - short_height
 
-        if car_straight_line.intersectsWith(top_line):
-            print(f"Distance to top line: {self.car_center.distanceTo(top_line)}")
-            return self.car_center.distanceTo(top_line)
-        elif car_straight_line.intersectsWith(left_line):
-            print(f"Distance to left line: {self.car_center.distanceTo(left_line)}")
-            return self.car_center.distanceTo(left_line)
-        elif car_straight_line.intersectsWith(right_line):
-            print(f"Distance to right line: {self.car_center.distanceTo(right_line)}")
-            return self.car_center.distanceTo(right_line)
-        elif car_straight_line.intersectsWith(bottom_line):
-            print(f"Distance to bottom line: {self.car_center.distanceTo(bottom_line)}")
-            return self.car_center.distanceTo(bottom_line)
+        # Walls for the world
+        # Bottom > left > right > top
+        for i, j in enumerate([[short_width, short_height, long_width, short_height],
+                               [short_width, short_height, short_width, long_height],
+                               [long_width, short_height, long_width, long_height],
+                               [short_width, long_height, long_width, long_height]
+                               ]):
+            if i == 0:
+                line_text = "bottom"
+            elif i == 1:
+                line_text = "left"
+            elif i == 2:
+                line_text = "right"
+            else:
+                line_text = "top"
+            line: Line = Line(Point(j[0], j[1]), Point(j[2], j[3]))
+            if car_straight_line.intersectsWith(line):
+                print(f"Distance to {line_text} line: {self.car_center.distanceTo(line)}")
+                return self.car_center.distanceTo(line)
+            i += 1
