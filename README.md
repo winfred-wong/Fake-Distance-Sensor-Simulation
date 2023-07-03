@@ -42,8 +42,10 @@ The class will assume there is an imaginary line extending from the car's positi
 1. The imaginary line is at the same heading angle of the car
 2. The imaginary line must be longer than the longest diagonal of the rectangle to avoid mistakes
 
-Based on `https://www.geeksforgeeks.org/check-if-two-given-line-segments-intersect/`, we can find out if two lines
-segments intersect. Then, using `https://www.cuemath.com/geometry/intersection-of-two-lines/` we can find the
+Based on [Do Lines intersect?](https://www.geeksforgeeks.org/check-if-two-given-line-segments-intersect/), we can find
+out if two lines
+segments intersect. Then,
+using [Fine intersection of two lines](https://www.cuemath.com/geometry/intersection-of-two-lines/) we can find the
 intersection point
 of two lines. From here, we have the heading angle of the car and the coordinate (with respect to the car) of the wall.
 So we convert the coordinate to that with respect to the origin by addition and then calculate the distance between
@@ -51,3 +53,8 @@ the car and the coordinate of the wall with respect to the origin to simulate a 
 heading angle
 and distance, we can convert from polar coordinate to cartesian to draw a dot on the map and as the car moves, we will
 complete the map.
+
+## GeoGebra
+
+There is a .ggb file, which helps you understand and visualise the parameters used in this project. You can navigate to
+[GeoGebra](https://www.geogebra.org/calculator) to open the file and have a look to test out with different settings.
